@@ -20,13 +20,18 @@ def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
+def googleMapsApiKey = localProperties.getProperty('googleMapsApiKey')
+if (googleMapsApiKey == null) {
+   googleMapsApiKey = System.getenv("GOOGLE_MAPS_API_KEY_ENVIRONMENT_VARIABLE")
+}
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.google.gms.google-services'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    namespace "com.unifei.imc.estacionamento_rotativo.estacionamento_rotativo"
+    namespace "com.unifei.estacionamento_rotativo"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
@@ -37,13 +42,17 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.unifei.imc.estacionamento_rotativo.estacionamento_rotativo"
+        applicationId "com.unifei.estacionamento_rotativo"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        versionCode 1
+        versionName "1.0.0"
+        // versionCode flutterVersionCode.toInteger()
+        // versionName flutterVersionName
+        multiDexEnabled true
+        manifestPlaceholders += [ googleMapsApiKey : googleMapsApiKey]
     }
 
     buildTypes {
@@ -54,7 +63,10 @@ android {
         }
     }
 }
-
+dependencies {
+  implementation platform('com.google.firebase:firebase-bom:32.1.1')
+  implementation 'com.facebook.android:facebook-android-sdk:latest.release'
+}
 flutter {
     source '../..'
 }

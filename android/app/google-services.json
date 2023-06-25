@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "198272551421",
+    "project_id": "parking-tracker-ed5e4",
+    "storage_bucket": "parking-tracker-ed5e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:198272551421:android:c031b11b140d0b97a17194",
+        "android_client_info": {
+          "package_name": "com.unifei.estacionamento_rotativo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "198272551421-ue2ae78ae8metsiqfnq87esb444v7qgq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.unifei.estacionamento_rotativo",
+            "certificate_hash": "d567efe3b42af902b53354bca5bfa62ee8e94c95"
+          }
+        },
+        {
+          "client_id": "198272551421-cej4stdc5fhlb5fagpv47uq7n80rg86c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsZ5qEZIdKKv3LKw7QhEm1VDlNYYEQMlg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "198272551421-6stelh1nd8p0gr6u2h4qq0ofrb3bp4pa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

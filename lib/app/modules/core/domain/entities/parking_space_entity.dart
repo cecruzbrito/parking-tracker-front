@@ -5,15 +5,19 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class ParkingSpaceEntity {
   final int id;
+  final int? idUsuario;
   final StatusParkingSpace status;
   final PositionParkingEntity position;
   final DateTime lastModification;
+  final DateTime? endReserved;
 
   ParkingSpaceEntity({
     required this.id,
     required this.status,
     required this.position,
     required this.lastModification,
+    this.idUsuario,
+    this.endReserved,
   });
 
   @override
@@ -35,7 +39,9 @@ enum StatusParkingSpace {
   available,
   reserved,
   assessment,
-  pending;
+  pending,
+  pendingExit,
+  pendingArrival;
 
   int toJson() {
     switch (this) {
@@ -50,6 +56,10 @@ enum StatusParkingSpace {
 
       case pending:
         return 3;
+      case pendingExit:
+        return 4;
+      case pendingArrival:
+        return 5;
     }
   }
 
@@ -63,6 +73,10 @@ enum StatusParkingSpace {
         return StatusParkingSpace.assessment;
       case 3:
         return StatusParkingSpace.pending;
+      case 4:
+        return StatusParkingSpace.pendingExit;
+      case 5:
+        return StatusParkingSpace.pendingArrival;
       default:
         return StatusParkingSpace.available;
     }
@@ -80,6 +94,9 @@ enum StatusParkingSpace {
         return await _setIcon("assets/images/icon_assessment.png");
 
       case pending:
+        return await _setIcon("assets/images/icon_car_pending.png");
+
+      default:
         return await _setIcon("assets/images/icon_car_pending.png");
     }
   }

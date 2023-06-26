@@ -17,7 +17,7 @@ class NavigatiorBarClient extends StatelessWidget {
         NavigationDestination(
           icon: Icon(
             Icons.home_outlined,
-            color: ColorsApp.purple,
+            color: Colors.grey,
           ),
           label: "Home",
           selectedIcon: Icon(
@@ -28,7 +28,7 @@ class NavigatiorBarClient extends StatelessWidget {
         NavigationDestination(
             icon: Icon(
               Icons.person_outline,
-              color: ColorsApp.purple,
+              color: Colors.grey,
             ),
             selectedIcon: Icon(
               Icons.person,
@@ -38,7 +38,7 @@ class NavigatiorBarClient extends StatelessWidget {
         NavigationDestination(
             icon: Icon(
               Icons.monetization_on_outlined,
-              color: ColorsApp.purple,
+              color: Colors.grey,
             ),
             selectedIcon: Icon(
               Icons.monetization_on,

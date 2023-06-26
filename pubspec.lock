@@ -81,14 +81,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.10.1"
-  equatable:
-    dependency: transitive
-    description:
-      name: equatable
-      sha256: c2b87cb7756efdf69892005af546c56c0b5037f54d2a88269b4f347a505e3ca2
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.5"
   facebook_auth_desktop:
     dependency: transitive
     description:
@@ -153,14 +145,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.6.0"
-  fkafka:
-    dependency: "direct main"
-    description:
-      name: fkafka
-      sha256: d0d22c5cee03e56a06f090cc2851045ecd0c8c484de66a94f246fafe157a5b86
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -279,10 +263,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_triple
-      sha256: "044d9951abd2c8da1d915437167832319ca6aaf8dac13b5a7fc3761c88dc29a6"
+      sha256: c4751dabfb00eabfeb3e240e61101aa868881bf323026ee46c3c3e7126b870df
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.1"
+    version: "2.1.0+1"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -408,6 +392,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.18.1"
   js:
     dependency: transitive
     description:
@@ -602,10 +594,10 @@ packages:
     dependency: transitive
     description:
       name: triple
-      sha256: "210eb1298db3d09465c6ea128413ffcb4859cb1140009f895d69efe439f9367c"
+      sha256: "0d049c7d44fbe093432c72ec059a958b1b22e0748b3b90e806383ef2376f34cb"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.1"
+    version: "2.1.0"
   typed_data:
     dependency: transitive
     description:

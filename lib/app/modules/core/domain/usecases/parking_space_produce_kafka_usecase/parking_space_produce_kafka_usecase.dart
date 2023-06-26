@@ -5,5 +5,5 @@ import '../../../../../shared/domain/errors/erros.dart';
 import '../../entities/parking_space_entity.dart';
 
 abstract class ParkingSpaceProduceKafkaUsecase {
-  Future<Either<AppFailure, void>> call(KafkaSession session, ParkingSpaceEntity ent);
+  Future<Either<AppFailure, ParkingSpaceEntity>> call(KafkaSession session, ParkingSpaceEntity ent);
 }

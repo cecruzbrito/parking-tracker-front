@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
     final size = MediaQuery.of(context).size;
     return TripleBuilder<LoginPageStore, LoginPageState>(
         store: store,
-        builder: (context, trp) {
+        builder: (__, trp) {
           return ScaffoldApp(
               isLoading: store.isLoading,
               settingsAppBar: AppBarDefault(settings: AppBarSettings()),

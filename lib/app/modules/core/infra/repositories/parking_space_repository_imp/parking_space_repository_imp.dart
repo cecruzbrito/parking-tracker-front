@@ -19,7 +19,7 @@ class ParkingSpaceRepositoryImp implements ParkingSpaceRepository {
   }
 
   @override
-  Future<Either<AppFailure, void>> produce(KafkaSession session, ParkingSpaceEntity parkingEnt) async {
+  Future<Either<AppFailure, ParkingSpaceEntity>> produce(KafkaSession session, ParkingSpaceEntity parkingEnt) async {
     try {
       return Right(await _datasource.produce(session, parkingEnt));
     } on AppFailure catch (e) {

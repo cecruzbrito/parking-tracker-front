@@ -10,6 +10,6 @@ class ParkingSpaceProduceKafkaUsecaseImp implements ParkingSpaceProduceKafkaUsec
   final ParkingSpaceRepository _repository;
   ParkingSpaceProduceKafkaUsecaseImp(this._repository);
   @override
-  Future<Either<AppFailure, void>> call(KafkaSession session, ParkingSpaceEntity ent) async =>
+  Future<Either<AppFailure, ParkingSpaceEntity>> call(KafkaSession session, ParkingSpaceEntity ent) async =>
       await _repository.produce(session, ent);
 }

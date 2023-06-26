@@ -32,13 +32,14 @@ class KafkaDatasourceImp implements KafkaDatasource {
   }
 
   @override
-  Future<void> produce(KafkaSession session, ParkingSpaceEntity ent) async {
+  Future<ParkingSpaceEntity> produce(KafkaSession session, ParkingSpaceEntity ent) async {
     try {
       var producer = Producer(session, 1, 1000);
       await producer.produce([
         ProduceEnvelope('STATUS_VAGA', 0,
             [Message(ParkingSpaceModel.toJson(ent).codeUnits, key: "${Random().nextInt(500000)}".codeUnits)]),
       ]);
+      return ent;
     } on FormatException catch (e) {
       throw KafkaProducerError(e.message);
     } on ProduceError catch (e) {

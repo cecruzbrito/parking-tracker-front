@@ -1,8 +1,8 @@
-import 'package:estacionamento_rotativo/app/shared/domain/entities/vehicle_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 
+import '../../../domain/entities/vehicle_view_entity.dart';
 import '../state/sign_up_add_vehicle_page_state.dart';
 
 class SingUpAddVehiclePageStore extends Store<SingUpAddVehiclePageState> {
@@ -22,12 +22,12 @@ class SingUpAddVehiclePageStore extends Store<SingUpAddVehiclePageState> {
     if (!formKey.currentState!.validate()) return;
 
     update(state.copyWith(
-        vehicle: VehicleEntity(color: ctrColor.text, model: ctrModel.text, licensePlate: ctrLicensePlate.text)));
+        vehicle: VehicleViewEntity(color: ctrColor.text, model: ctrModel.text, licensePlate: ctrLicensePlate.text)));
 
     Modular.to.pop(state.vehicle);
   }
 
-  initializing(VehicleEntity? vehicle) {
+  initializing(VehicleViewEntity? vehicle) {
     if (vehicle == null) return;
     ctrModel.text = vehicle.model;
     ctrLicensePlate.text = vehicle.licensePlate;

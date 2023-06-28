@@ -17,3 +17,11 @@ class DomainFailure implements AppFailure {
   @override
   String get message => _message;
 }
+
+class TimeOutFailure implements AppFailure {
+  final String _message;
+  const TimeOutFailure(this._message);
+
+  @override
+  String get message => _message;
+}

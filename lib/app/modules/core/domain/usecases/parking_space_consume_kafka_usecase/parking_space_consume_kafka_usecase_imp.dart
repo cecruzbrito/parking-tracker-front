@@ -11,5 +11,5 @@ class ParkingSpaceConsumeKafkaUsecaseImp implements ParkingSpaceConsumeKafkaUsec
   ParkingSpaceConsumeKafkaUsecaseImp(this._repository);
   @override
   Future<Either<AppFailure, Stream<ParkingSpaceEntity>>> call(KafkaSession session) async =>
-      await _repository.consumeKafka(session);
+      await _repository.consumeKafkaStatusVaga(session);
 }

@@ -7,7 +7,8 @@ class ColorsApp {
 
 enum TypeOfColorApp {
   strong,
-  weak;
+  weak,
+  error;
 
   Color get color {
     switch (this) {
@@ -15,6 +16,19 @@ enum TypeOfColorApp {
         return ColorsApp.purple;
       case TypeOfColorApp.weak:
         return ColorsApp.purpleSecundary;
+      case TypeOfColorApp.error:
+        return Colors.red;
+    }
+  }
+
+  Color get colorFont {
+    switch (this) {
+      case TypeOfColorApp.strong:
+        return Colors.white;
+      case TypeOfColorApp.weak:
+        return ColorsApp.purple;
+      case TypeOfColorApp.error:
+        return Colors.white;
     }
   }
 }

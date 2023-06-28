@@ -4,6 +4,7 @@ import 'package:estacionamento_rotativo/app/shared/presentation/widgets/scaffold
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../../../../../shared/presentation/widgets/app_bar_default.dart';
 import '../../../../../shared/presentation/widgets/button_app.dart';
@@ -40,6 +41,7 @@ class _SignUpPageState extends State<SignUpPage> with ValidatorSignUpPage {
         store: store,
         builder: (context, trp) {
           return ScaffoldApp(
+              key: store.keyScaffold,
               settingsAppBar: AppBarDefault(settings: AppBarSettings(title: "Cadastro", onTapBack: Modular.to.pop)),
               isLoading: trp.isLoading,
               body: Center(
@@ -77,6 +79,13 @@ class _SignUpPageState extends State<SignUpPage> with ValidatorSignUpPage {
                       SizedBox(height: size.height * .02),
                       FieldApp(
                         settings: SettingsFieldApp(
+                            formatters: [
+                              MaskTextInputFormatter(
+                                  mask: '(##) #########',
+                                  filter: {"#": RegExp(r'[0-9]')},
+                                  type: MaskAutoCompletionType.lazy)
+                            ],
+                            inputType: TextInputType.number,
                             validator: validatorEmpty,
                             ctr: store.ctrContato,
                             prefixIcon: Icons.email,

@@ -1,11 +1,11 @@
-import 'package:estacionamento_rotativo/app/shared/domain/entities/vehicle_entity.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../shared/presentation/colors/colors_app.dart';
+import '../../../../domain/entities/vehicle_view_entity.dart';
 
 class VehicleDetails extends StatelessWidget {
   const VehicleDetails({super.key, required this.vehicle, required this.onTap});
-  final VehicleEntity vehicle;
+  final VehicleViewEntity vehicle;
   final Function() onTap;
   @override
   Widget build(BuildContext context) {

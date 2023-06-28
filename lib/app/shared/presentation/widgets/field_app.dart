@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:estacionamento_rotativo/app/shared/presentation/colors/colors_app.dart';
+import 'package:flutter/services.dart';
 
 class FieldApp extends StatelessWidget {
   const FieldApp({super.key, required this.settings});
@@ -25,6 +26,8 @@ class FieldApp extends StatelessWidget {
     return Theme(
       data: Theme.of(context).copyWith(primaryColor: ColorsApp.purple),
       child: TextFormField(
+          keyboardType: settings.inputType,
+          inputFormatters: settings.formatters,
           controller: settings.ctr,
           validator: settings.validator,
           obscureText: settings.hasShowText == null ? false : !settings.hasShowText!,
@@ -52,8 +55,17 @@ class SettingsFieldApp {
   final SufixIconFieldApp? suffixIcon;
   final bool? hasShowText;
   final String? Function(String?)? validator;
+  final List<TextInputFormatter>? formatters;
+  final TextInputType? inputType;
   SettingsFieldApp(
-      {required this.ctr, this.validator, this.prefixIcon, this.labelText, this.suffixIcon, this.hasShowText});
+      {required this.ctr,
+      this.formatters,
+      this.inputType,
+      this.validator,
+      this.prefixIcon,
+      this.labelText,
+      this.suffixIcon,
+      this.hasShowText});
 }
 
 class SufixIconFieldApp {

@@ -1,4 +1,3 @@
-import 'package:estacionamento_rotativo/app/shared/domain/entities/vehicle_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
@@ -7,12 +6,13 @@ import '../../../../../shared/presentation/widgets/app_bar_default.dart';
 import '../../../../../shared/presentation/widgets/button_app.dart';
 import '../../../../../shared/presentation/widgets/field_app.dart';
 import '../../../../../shared/presentation/widgets/scaffold_app.dart';
+import '../../../domain/entities/vehicle_view_entity.dart';
 import '../state/sign_up_add_vehicle_page_state.dart';
 import '../store/sign_up_add_vehicle_page_store.dart';
 
 class SingUpAddVehiclePage extends StatefulWidget {
   const SingUpAddVehiclePage({super.key, required this.store, this.vehicle});
-  final VehicleEntity? vehicle;
+  final VehicleViewEntity? vehicle;
   final SingUpAddVehiclePageStore store;
 
   @override
@@ -21,7 +21,7 @@ class SingUpAddVehiclePage extends StatefulWidget {
 
 class _SingUpAddVehiclePageState extends State<SingUpAddVehiclePage> with ValidatorAddVehicle {
   SingUpAddVehiclePageStore get store => widget.store;
-  VehicleEntity? get vehicle => widget.vehicle;
+  VehicleViewEntity? get vehicle => widget.vehicle;
 
   @override
   void initState() {

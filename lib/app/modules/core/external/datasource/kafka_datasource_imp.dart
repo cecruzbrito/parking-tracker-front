@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:estacionamento_rotativo/app/modules/core/domain/entities/parking_space_entity.dart';
@@ -9,7 +10,7 @@ import '../../infra/datasources/kafka_datasource/kafka_datasource.dart';
 
 class KafkaDatasourceImp implements KafkaDatasource {
   @override
-  Future<Stream<ParkingSpaceEntity>> getConsumer(KafkaSession session) async {
+  Future<Stream<ParkingSpaceEntity>> getConsumerStatusVaga(KafkaSession session) async {
     try {
       var topicPartitions = {
         "STATUS_VAGA": {0}
@@ -40,6 +41,46 @@ class KafkaDatasourceImp implements KafkaDatasource {
             [Message(ParkingSpaceModel.toJson(ent).codeUnits, key: "${Random().nextInt(500000)}".codeUnits)]),
       ]);
       return ent;
+    } on FormatException catch (e) {
+      throw KafkaProducerError(e.message);
+    } on ProduceError catch (e) {
+      throw KafkaProducerError(e.result.errors.map((e) => e.message).join(","));
+    } on Exception catch (e) {
+      throw KafkaProducerError("$e");
+    }
+  }
+
+  @override
+  Future<Stream<ParkingSpaceEntity>> consumeKafkaAgentCheckStatus(KafkaSession session) async {
+    try {
+      var topicPartitions = {"AGENT_CHECK_STATUS": Set.of(List<int>.generate(50, (index) => index))};
+
+      final consumer = Consumer(session, ConsumerGroup(session, "agente_parking"), topicPartitions, 100, 1);
+
+      return consumer.consume().asyncMap<ParkingSpaceEntity>((event) {
+        final park = ParkingSpaceModel.fromJson(String.fromCharCodes(event.message.value));
+        event.ack();
+        return park;
+      });
+    } on FormatException catch (e) {
+      throw KafkaConsumerError(e.message);
+    } on MessageCrcMismatchError catch (e) {
+      throw KafkaConsumerError(e.message);
+    } on Exception catch (e) {
+      throw KafkaConsumerError("$e");
+    }
+  }
+
+  @override
+  Future<void> produceAutuacao(KafkaSession session, int idAgente, String placa) async {
+    try {
+      var producer = Producer(session, 1, 1000);
+      await producer.produce([
+        ProduceEnvelope('INFRACOES', 0, [
+          Message(jsonEncode({"idAgente": idAgente, "placa": placa}).codeUnits,
+              key: "${Random().nextInt(500000)}".codeUnits)
+        ]),
+      ]);
     } on FormatException catch (e) {
       throw KafkaProducerError(e.message);
     } on ProduceError catch (e) {

@@ -39,31 +39,32 @@ class BottomSheetParkingSpace extends StatelessWidget {
                   const Divider(),
                   SizedBox(height: size.height * .02),
                   Text(
-                      "Data da reserva: ${DateFormat('dd/MM/yy - HH:mm:ss').format(park.endReserved!.subtract(const Duration(hours: 1, minutes: 15)))}"),
-                  Text("Data do fim da reserva: ${DateFormat('dd/MM/yy - HH:mm:ss').format(park.endReserved!)}"),
+                      "Data da reserva: ${DateFormat('dd/MM/yy - HH:mm:ss').format(park.reservation!.subtract(const Duration(hours: 1)))}"),
+                  Text("Data do fim da reserva: ${DateFormat('dd/MM/yy - HH:mm:ss').format(park.reservation!)}"),
                   SizedBox(height: size.height * .02),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ButtonApp(
-                          horizontal: EdgeInsets.symmetric(horizontal: size.width * .08),
-                          typeOfColorApp: TypeOfColorApp.strong,
-                          label: "Informar que já chegou a vaga",
-                          onTap: () {
-                            Modular.to.pop();
-                            onTapInformThatExit();
-                          }),
-                      SizedBox(height: size.height * .01),
-                      ButtonApp(
-                          horizontal: EdgeInsets.symmetric(horizontal: size.width * .08),
-                          typeOfColorApp: TypeOfColorApp.weak,
-                          label: "Informar que está saiu da da vaga",
-                          onTap: () {
-                            Modular.to.pop();
-                            onTapInformThatArrived();
-                          }),
-                    ],
-                  )
+                  if (park.status != StatusParkingSpace.reserved)
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ButtonApp(
+                            horizontal: EdgeInsets.symmetric(horizontal: size.width * .08),
+                            typeOfColorApp: TypeOfColorApp.strong,
+                            label: "Informar que já chegou a vaga",
+                            onTap: () {
+                              Modular.to.pop();
+                              onTapInformThatArrived();
+                            }),
+                        SizedBox(height: size.height * .01),
+                        ButtonApp(
+                            horizontal: EdgeInsets.symmetric(horizontal: size.width * .08),
+                            typeOfColorApp: TypeOfColorApp.weak,
+                            label: "Informar que está saiu da da vaga",
+                            onTap: () {
+                              Modular.to.pop();
+                              onTapInformThatExit();
+                            }),
+                      ],
+                    )
                 ],
               ),
             ),

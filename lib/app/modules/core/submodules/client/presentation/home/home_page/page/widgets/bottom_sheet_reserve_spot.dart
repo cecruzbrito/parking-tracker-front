@@ -9,6 +9,7 @@ class BottomSheetReserveSpot extends StatelessWidget {
   final Function() onTapPositive;
   // Não é necessario dar o pop
   final Function() onTapNegative;
+
   show(BuildContext context) async => await showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(40))),

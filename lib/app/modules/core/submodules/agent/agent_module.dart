@@ -4,7 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class AgentModule extends Module {
   @override
-  List<Bind<Object>> get binds => [Bind((i) => AgentHomePageStore())];
+  List<Bind<Object>> get binds => [Bind((i) => AgentHomePageStore(i(), i(), i(), i(), i(), i()))];
 
   @override
   List<ModularRoute> get routes => [ChildRoute("/", child: (context, __) => AgentHomePage(store: context.read()))];

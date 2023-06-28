@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../../../../../../../shared/presentation/colors/colors_app.dart';
 import '../../../../../../../../shared/presentation/widgets/snack_bar_error.dart';
 import '../store/home_client_page_store.dart';
 import 'widgets/navigation_bar_client.dart';
@@ -45,22 +46,28 @@ class _HomeClientPageState extends State<HomeClientPage> {
                 currentIndex: trp.state.indexCtrNavigationBar,
                 onTap: store.onTapInIconInNavigation,
               ),
-              body: Stack(
-                children: [
-                  GoogleMap(
-                      onMapCreated: store.onCreated,
-                      mapToolbarEnabled: false,
-                      buildingsEnabled: false,
-                      tiltGesturesEnabled: false,
-                      markers: Set.of(trp.state.markers),
-                      minMaxZoomPreference: const MinMaxZoomPreference(19, 50),
-                      initialCameraPosition: trp.state.cameraPosition ?? const CameraPosition(target: LatLng(0, 0))),
-                  if (trp.state.parkingSpaceSelectedUser != null)
-                    Align(
-                        alignment: Alignment.topRight,
-                        child: IconSeeParkingSpacesReserved(onTap: store.onTapMyReserves))
-                ],
-              ));
+              body: trp.isLoading
+                  ? Container(
+                      color: Colors.black.withOpacity(.3),
+                      alignment: Alignment.center,
+                      child: const CircularProgressIndicator(color: ColorsApp.purple))
+                  : Stack(
+                      children: [
+                        GoogleMap(
+                            onMapCreated: store.onCreated,
+                            mapToolbarEnabled: false,
+                            buildingsEnabled: false,
+                            tiltGesturesEnabled: false,
+                            markers: Set.of(trp.state.markers),
+                            minMaxZoomPreference: const MinMaxZoomPreference(19, 50),
+                            initialCameraPosition:
+                                trp.state.cameraPosition ?? const CameraPosition(target: LatLng(0, 0))),
+                        if (trp.state.parkingSpaceSelectedUser != null)
+                          Align(
+                              alignment: Alignment.topRight,
+                              child: IconSeeParkingSpacesReserved(onTap: store.onTapMyReserves))
+                      ],
+                    ));
         });
   }
 }

@@ -1,24 +1,29 @@
 import 'dart:ui';
 
+import 'package:estacionamento_rotativo/app/modules/core/domain/entities/vehicle_entity.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class ParkingSpaceEntity {
   final int id;
-  final int? idUsuario;
+  final VehicleEntity? vehicle;
   final StatusParkingSpace status;
   final PositionParkingEntity position;
   final DateTime lastModification;
-  final DateTime? endReserved;
+  final DateTime? reservation;
 
   ParkingSpaceEntity({
     required this.id,
     required this.status,
     required this.position,
     required this.lastModification,
-    this.idUsuario,
-    this.endReserved,
+    this.vehicle,
+    this.reservation,
   });
+
+  bool get isExpired => reservation == null
+      ? false
+      : reservation!.isBefore(DateTime.now()) || reservation!.isAtSameMomentAs(DateTime.now());
 
   @override
   String toString() {
@@ -36,12 +41,12 @@ class PositionParkingEntity {
 }
 
 enum StatusParkingSpace {
-  available,
-  reserved,
-  assessment,
-  pending,
-  pendingExit,
-  pendingArrival;
+  available, //disponivel
+  reserved, //reservada
+  assessment, //autuada
+  pending, //pendente (geral)
+  pendingExit, //checar_pendencia_saida
+  pendingArrival; //checar_pendencia_gerada
 
   int toJson() {
     switch (this) {
@@ -56,8 +61,10 @@ enum StatusParkingSpace {
 
       case pending:
         return 3;
+
       case pendingExit:
         return 4;
+
       case pendingArrival:
         return 5;
     }
@@ -85,25 +92,25 @@ enum StatusParkingSpace {
   Future<BitmapDescriptor> getImage() async {
     switch (this) {
       case available:
-        return await _setIcon("assets/images/icon_car_avaliable.png");
+        return await _setIcon("assets/images/available.png");
 
       case reserved:
-        return await _setIcon("assets/images/icon_car_reserved.png");
+        return await _setIcon("assets/images/reserved.png");
 
       case assessment:
         return await _setIcon("assets/images/icon_assessment.png");
 
       case pending:
-        return await _setIcon("assets/images/icon_car_pending.png");
+        return await _setIcon("assets/images/warning.png");
 
       default:
-        return await _setIcon("assets/images/icon_car_pending.png");
+        return await _setIcon("assets/images/warning.png");
     }
   }
 
   Future<BitmapDescriptor> _setIcon(String path) async {
     final data = await rootBundle.load(path);
-    final codec = await instantiateImageCodec(data.buffer.asUint8List(), targetHeight: 100, targetWidth: 100);
+    final codec = await instantiateImageCodec(data.buffer.asUint8List(), targetHeight: 70, targetWidth: 70);
     final fi = await codec.getNextFrame();
     return BitmapDescriptor.fromBytes((await fi.image.toByteData(format: ImageByteFormat.png))!.buffer.asUint8List());
   }

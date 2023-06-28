@@ -40,8 +40,10 @@ dependencies:
   change_app_package_name: ^1.1.0
   google_maps_flutter: ^2.3.1
   intl: ^0.18.1
+  dio: ^5.2.1+1
   kafkabr:
     git: https://github.com/armando-couto/kafkabr.git
+  mask_text_input_formatter: ^2.4.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -70,10 +72,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/google_icon.png
-    - assets/images/icon_car_reserved.png
-    - assets/images/icon_car_avaliable.png
-    - assets/images/icon_car_pending.png
-    - assets/images/icon_assessment.png
+    - assets/images/available.png
+    - assets/images/reserved.png
+    - assets/images/warning.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
